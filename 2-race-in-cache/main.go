@@ -48,6 +48,7 @@ func New(load KeyStoreCacheLoader) *KeyStoreCache {
 func (k *KeyStoreCache) Get(key string) string {
 	k.lock.Lock()
 	defer k.lock.Unlock()
+
 	if e, ok := k.cache[key]; ok {
 		k.pages.MoveToFront(e)
 		return e.Value.(page).Value
